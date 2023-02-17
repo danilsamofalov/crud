@@ -31,7 +31,9 @@ class UsersController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        //
+        User::create($request->only(['name', 'email', 'password']));
+        return redirect()->route('users.index');
+
     }
 
     /**
@@ -47,7 +49,7 @@ class UsersController extends Controller
      */
     public function edit(User $user): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view('form', compact('user'));
+        return view('update', compact('user'));
     }
 
     /**
@@ -55,7 +57,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user): RedirectResponse
     {
-        //
+        $user->update($request->only(['name', 'email', 'password']));
+        return redirect()->route('users.index');
     }
 
     /**
