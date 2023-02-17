@@ -23,7 +23,7 @@ class UsersController extends Controller
      */
     public function create(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view('form');
+        return view('create');
     }
 
     /**
@@ -41,7 +41,7 @@ class UsersController extends Controller
      */
     public function show(User $user): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view('show');
+        return view('read', compact('user'));
     }
 
     /**
@@ -66,6 +66,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user): RedirectResponse
     {
-        //
+        $user->delete();
+        return redirect()->route('users.index');
     }
 }
